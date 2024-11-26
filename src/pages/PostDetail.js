@@ -4,33 +4,32 @@ import axios from 'axios';
 
 function PostDetail() {
     const { id } = useParams();
-    const [post, setPost] = useState(null);
+    const [article, setArticle] = useState(null);
 
     useEffect(() => {
         axios.get(`http://localhost:5000/api/posts/${id}`)
-            .then((response) => {
-                setPost(response.data);
+            .then(response => {
+                setArticle(response.data);
             })
-            .catch((error) => {
-                console.error('Errore nel recupero dei dettagli del post:', error);
+            .catch(error => {
+                console.error('Errore nel recuperare i dettagli dell\'articolo:', error);
             });
     }, [id]);
 
-    if (!post) {
-        return <p>Caricamento...</p>;
-    }
+    if (!article) return <div>Loading...</div>;
 
     return (
         <div>
-            <h1>{post.title}</h1>
-            <p>{post.content}</p>
-            {post.image && <img src={post.image} alt="Immagine" width="200" />}
-            <p><strong>Categoria:</strong> {post.category}</p>
-            <p><strong>Tags:</strong> {Array.isArray(post.tags) ? post.tags.join(', ') : 'Nessun tag'}</p>
-            <p><strong>Pubblicato:</strong> {post.isPublished ? 'Sì' : 'No'}</p>
+            <h1>{article.title}</h1>
+            {article.image && <img src={article.image} alt="Immagine" width="300" />}
+            <p><strong>Categoria:</strong> {article.category}</p>
+            <p><strong>Contenuto:</strong> {article.content}</p>
+            <p><strong>Tags:</strong> {Array.isArray(article.tags) ? article.tags.join(', ') : 'Nessun tag'}</p>
+            <p><strong>Pubblicato:</strong> {article.isPublished ? 'Sì' : 'No'}</p>
         </div>
     );
 }
 
 export default PostDetail;
+
 
