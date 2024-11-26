@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 function Posts() {
     const [posts, setPosts] = useState([]);
 
@@ -22,6 +22,7 @@ function Posts() {
                     <li key={post.id}>
                         <h3>{post.title}</h3>
                         <p>{post.content}</p>
+                        <Link to={`/posts/${post.id}`}>Vedi Dettagli</Link>
                     </li>
                 ))}
             </ul>
