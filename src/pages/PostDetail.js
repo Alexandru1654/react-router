@@ -24,7 +24,10 @@ function PostDetail() {
         <div>
             <h1>{post.title}</h1>
             <p>{post.content}</p>
-            {}
+            {post.image && <img src={post.image} alt="Immagine" width="200" />}
+            <p><strong>Categoria:</strong> {post.category}</p>
+            <p><strong>Tags:</strong> {Array.isArray(post.tags) ? post.tags.join(', ') : 'Nessun tag'}</p>
+            <p><strong>Pubblicato:</strong> {post.isPublished ? 'Sì' : 'No'}</p>
         </div>
     );
 }
